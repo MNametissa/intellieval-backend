@@ -12,6 +12,7 @@ import { MatieresModule } from './matieres/matieres.module';
 import { QuestionnairesModule } from './questionnaires/questionnaires.module';
 import { CampagnesModule } from './campagnes/campagnes.module';
 import { ReponsesModule } from './reponses/reponses.module';
+import { CoursModule } from './cours/cours.module';
 
 @Module({
   imports: [
@@ -44,6 +45,7 @@ import { ReponsesModule } from './reponses/reponses.module';
     QuestionnairesModule,
     CampagnesModule,
     ReponsesModule,
+    CoursModule,
   ],
   controllers: [AppController],
   providers: [AppService],
