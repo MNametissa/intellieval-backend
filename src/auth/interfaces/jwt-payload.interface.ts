@@ -1,11 +1,2 @@
-import { UserRole } from '../../users/entities/user.entity';
-
-export interface JwtPayload {
-  userId: string;
-  email: string;
-  role: UserRole;
-  departmentId: string;
-  filiereId: string | null;
-  iat?: number;
-  exp?: number;
-}
+// Re-export the shared interface for backwards compatibility
+export type { JwtPayload } from '../../shared/interfaces/jwt-payload.interface';
