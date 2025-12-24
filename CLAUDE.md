@@ -181,3 +181,4 @@ When creating a new feature module:
 - we must have pagination and filters
 - always have a sure a search feature along pagination and filters
 - no ai mention in commits
+- after new features tested, commit
