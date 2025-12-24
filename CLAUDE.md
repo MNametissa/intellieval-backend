@@ -178,3 +178,6 @@ When creating a new feature module:
 - Test configuration in package.json jest section
 - Use `@nestjs/testing` for dependency injection in tests
 - always refer to @rules.md to know the implementation rules
+- we must have pagination and filters
+- always have a sure a search feature along pagination and filters
+- no ai mention in commits
