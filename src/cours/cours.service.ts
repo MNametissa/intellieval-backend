@@ -165,15 +165,17 @@ export class CoursService {
 
     const updated = await this.repository.update(id, updateDto);
 
-    this.eventEmitter.emit(
-      'cours.updated',
-      new CoursUpdatedEvent(
-        updated.id,
-        updated.titre,
-        updated.matiereId,
-        updated.updatedAt,
-      ),
-    );
+    if (updated) {
+      this.eventEmitter.emit(
+        'cours.updated',
+        new CoursUpdatedEvent(
+          updated.id,
+          updated.titre,
+          updated.matiereId,
+          updated.updatedAt,
+        ),
+      );
+    }
 
     return updated;
   }

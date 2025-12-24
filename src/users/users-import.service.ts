@@ -181,9 +181,8 @@ export class UsersImportService {
         }
 
         // Check if filiere exists (for students)
-        let filiere = null;
         if (row.role === 'ETUDIANT' && row.filiereId) {
-          filiere = await this.filiereRepository.findOne({
+          const filiere = await this.filiereRepository.findOne({
             where: { id: row.filiereId },
           });
 
@@ -230,7 +229,7 @@ export class UsersImportService {
           name: user.name,
           email: user.email,
           role: user.role,
-          matricule: user.matricule,
+          matricule: user.matricule || undefined,
         });
       } catch (error) {
         failed.push({

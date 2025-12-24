@@ -15,6 +15,7 @@ import { ReponsesModule } from './reponses/reponses.module';
 import { CoursModule } from './cours/cours.module';
 import { ExportsModule } from './exports/exports.module';
 import { AnalyticsModule } from './analytics/analytics.module';
+import { NotificationsModule } from './notifications/notifications.module';
 
 @Module({
   imports: [
@@ -50,6 +51,7 @@ import { AnalyticsModule } from './analytics/analytics.module';
     CoursModule,
     ExportsModule,
     AnalyticsModule,
+    NotificationsModule,
   ],
   controllers: [AppController],
   providers: [AppService],

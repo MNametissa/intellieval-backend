@@ -52,3 +52,26 @@ export class EnseignantAddedToCampagneEvent {
     public readonly enseignantId: string,
   ) {}
 }
+
+export class CampagneStartedEvent {
+  constructor(
+    public readonly campagneId: string,
+    public readonly titre: string,
+    public readonly dateFin: Date,
+  ) {}
+}
+
+export class CampagneEndingSoonEvent {
+  constructor(
+    public readonly campagneId: string,
+    public readonly titre: string,
+    public readonly dateFin: Date,
+  ) {}
+}
+
+export class CampagneEndedEvent {
+  constructor(
+    public readonly campagneId: string,
+    public readonly titre: string,
+  ) {}
+}

@@ -16,7 +16,7 @@ import {
   ForbiddenException,
 } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
-import { Response } from 'express';
+import type { Response } from 'express';
 import { CoursService } from './cours.service';
 import { UploadCoursDto } from './dto/upload-cours.dto';
 import { UpdateCoursDto } from './dto/update-cours.dto';
