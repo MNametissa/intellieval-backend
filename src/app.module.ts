@@ -13,6 +13,8 @@ import { QuestionnairesModule } from './questionnaires/questionnaires.module';
 import { CampagnesModule } from './campagnes/campagnes.module';
 import { ReponsesModule } from './reponses/reponses.module';
 import { CoursModule } from './cours/cours.module';
+import { ExportsModule } from './exports/exports.module';
+import { AnalyticsModule } from './analytics/analytics.module';
 
 @Module({
   imports: [
@@ -46,6 +48,8 @@ import { CoursModule } from './cours/cours.module';
     CampagnesModule,
     ReponsesModule,
     CoursModule,
+    ExportsModule,
+    AnalyticsModule,
   ],
   controllers: [AppController],
   providers: [AppService],
