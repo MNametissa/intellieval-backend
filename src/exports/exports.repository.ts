@@ -74,7 +74,7 @@ export class ExportsRepository {
 
     if (filters.search) {
       queryBuilder.andWhere(
-        '(matiere.titre LIKE :search OR enseignant.name LIKE :search OR filiere.nom LIKE :search)',
+        '(matiere.nom LIKE :search OR enseignant.name LIKE :search OR filiere.name LIKE :search)',
         { search: `%${filters.search}%` },
       );
     }
