@@ -16,7 +16,7 @@ import {
 } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { UsersService } from './users.service';
-import { UserImportService } from './user-import.service';
+import { UsersImportService } from './users-import.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { UserRole } from './entities/user.entity';
@@ -30,44 +30,48 @@ import { Public } from '../common/decorators/public.decorator';
 export class UsersController {
   constructor(
     private readonly usersService: UsersService,
-    private readonly userImportService: UserImportService,
+    private readonly usersImportService: UsersImportService,
   ) {}
 
-  @Post()
+  @Get('import/template')
   @Roles(UserRole.ADMIN)
-  @HttpCode(HttpStatus.CREATED)
-  create(@Body() createUserDto: CreateUserDto) {
-    return this.usersService.create(createUserDto);
+  async downloadTemplate(@Query('res') res: any) {
+    const buffer = await this.usersImportService.generateTemplate();
+    return {
+      buffer: buffer.toString('base64'),
+      filename: 'template_import_utilisateurs.xlsx',
+      mimeType:
+        'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+    };
+  }
+
+  @Post('import/preview')
+  @Roles(UserRole.ADMIN)
+  @HttpCode(HttpStatus.OK)
+  @UseInterceptors(FileInterceptor('file'))
+  async previewImport(@UploadedFile() file: Express.Multer.File) {
+    if (!file) {
+      throw new BadRequestException('Fichier requis');
+    }
+    return this.usersImportService.previewImport(file);
   }
 
   @Post('import')
   @Roles(UserRole.ADMIN)
   @HttpCode(HttpStatus.CREATED)
   @UseInterceptors(FileInterceptor('file'))
-  async importUsers(
-    @UploadedFile() file: Express.Multer.File,
-    @Body('departmentMap') departmentMapJson: string,
-    @Body('filiereMap') filiereMapJson: string,
-  ) {
+  async importUsers(@UploadedFile() file: Express.Multer.File) {
     if (!file) {
-      throw new BadRequestException('File is required');
+      throw new BadRequestException('Fichier requis');
     }
+    return this.usersImportService.importUsers(file);
+  }
 
-    const departmentMap = new Map<string, string>(
-      JSON.parse(departmentMapJson || '[]'),
-    );
-    const filiereMap = new Map<string, string>(
-      JSON.parse(filiereMapJson || '[]'),
-    );
-
-    const content = file.buffer.toString('utf-8');
-    const rows = this.userImportService.parseCSV(content);
-
-    return this.userImportService.importUsers(
-      rows,
-      departmentMap,
-      filiereMap,
-    );
+  @Post()
+  @Roles(UserRole.ADMIN)
+  @HttpCode(HttpStatus.CREATED)
+  create(@Body() createUserDto: CreateUserDto) {
+    return this.usersService.create(createUserDto);
   }
 
   @Get()
