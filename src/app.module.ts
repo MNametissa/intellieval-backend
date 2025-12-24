@@ -6,6 +6,12 @@ import { AppService } from './app.service';
 import { SharedModule } from './shared/shared.module';
 import { UsersModule } from './users/users.module';
 import { AuthModule } from './auth/auth.module';
+import { DepartmentsModule } from './departments/departments.module';
+import { FilieresModule } from './filieres/filieres.module';
+import { MatieresModule } from './matieres/matieres.module';
+import { QuestionnairesModule } from './questionnaires/questionnaires.module';
+import { CampagnesModule } from './campagnes/campagnes.module';
+import { ReponsesModule } from './reponses/reponses.module';
 
 @Module({
   imports: [
@@ -32,6 +38,12 @@ import { AuthModule } from './auth/auth.module';
     SharedModule,
     UsersModule,
     AuthModule,
+    DepartmentsModule,
+    FilieresModule,
+    MatieresModule,
+    QuestionnairesModule,
+    CampagnesModule,
+    ReponsesModule,
   ],
   controllers: [AppController],
   providers: [AppService],
