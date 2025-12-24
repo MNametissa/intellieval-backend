@@ -6,17 +6,11 @@ import {
   UpdateDateColumn,
   Index,
 } from 'typeorm';
+import { UserRole } from '../../shared/enums/user-role.enum';
+import { UserStatus } from '../../shared/enums/user-status.enum';
 
-export enum UserRole {
-  ADMIN = 'ADMIN',
-  ENSEIGNANT = 'ENSEIGNANT',
-  ETUDIANT = 'ETUDIANT',
-}
-
-export enum UserStatus {
-  ACTIVE = 'active',
-  INACTIVE = 'inactive',
-}
+// Re-export for backwards compatibility
+export { UserRole, UserStatus };
 
 @Entity('users')
 @Index(['email'], { unique: true })
