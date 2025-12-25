@@ -1,10 +1,10 @@
-import { Repository } from 'typeorm';
+import { Repository, ObjectLiteral } from 'typeorm';
 
 export type MockType<T> = {
   [P in keyof T]?: jest.Mock<any, any>;
 };
 
-export const createMockRepository = <T = any>(): MockType<Repository<T>> => ({
+export const createMockRepository = <T extends ObjectLiteral = any>(): MockType<Repository<T>> => ({
   find: jest.fn(),
   findOne: jest.fn(),
   findOneBy: jest.fn(),
